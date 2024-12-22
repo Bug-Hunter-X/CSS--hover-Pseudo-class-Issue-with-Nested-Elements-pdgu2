@@ -1,0 +1,50 @@
+The problem lies in CSS specificity. The selector `.container:hover .inner` is less specific than the selector `.container .inner`. To fix this, we'll use the `!important` flag or change the selector order.
+
+**Solution using !important (generally less preferred):**
+
+```css
+.container {
+  width: 200px;
+  height: 200px;
+  background-color: lightblue;
+}
+
+.container:hover {
+  background-color: lightgreen;
+}
+
+.container .inner {
+  width: 100px;
+  height: 100px;
+  background-color: yellow;
+}
+
+.container:hover .inner {
+  background-color: orange !important;
+}
+```
+
+**Solution by using a more specific selector:**
+
+```css
+.container {
+  width: 200px;
+  height: 200px;
+  background-color: lightblue;
+}
+
+.container:hover {
+  background-color: lightgreen;
+}
+
+.container .inner {
+  width: 100px;
+  height: 100px;
+  background-color: yellow;
+}
+
+.container:hover > .inner {
+  background-color: orange;
+}
+```
+This second solution changes the selector to `.container:hover > .inner`, ensuring that the hover effect only applies to direct children of the `.container` element.  This approach is generally preferred over using `!important`.
